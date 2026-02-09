@@ -5,12 +5,16 @@ import { config } from "./config";
 import { register, httpRequestCounter, healthCheckCounter } from "./metrics";
 import os from "os";
 import { getDeviceState, simulateFault, startDeviceSimulation, FaultType } from "./device";
+import cors from "cors";
+
 
 
 export function createApp() {
   const app = express();
 
   app.use(express.json());
+
+  app.use(cors());
 
   // structured request logging
   app.use(

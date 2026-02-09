@@ -12,6 +12,18 @@ Built to demonstrate reliability patterns used in factory-floor / station applic
 - Dockerized build/run
 - Graceful shutdown (SIGINT/SIGTERM)
 
+## Frontend Dashboard
+A simple React + TypeScript dashboard that connects to the backend and visualizes station state.
+
+**Features:**
+- Live health and device status
+- Fault injection controls
+- Station metrics preview
+- Client-side image recognition demo (MobileNet, runs in browser)
+
+The frontend communicates with the backend over HTTP and is designed to resemble an internal station monitoring UI.
+
+
 ## Endpoints
 - `GET /` — service info
 - `GET /health` — runtime + host health snapshot
@@ -23,3 +35,10 @@ Built to demonstrate reliability patterns used in factory-floor / station applic
 ```bash
 npm install
 npm run dev
+
+## Frontend (UI)
+```bash
+cd station-health-ui
+npm install
+npm run dev
+
