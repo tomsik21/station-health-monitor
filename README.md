@@ -31,11 +31,26 @@ The frontend communicates with the backend over HTTP and is designed to resemble
 - `POST /simulate/fault` — inject a simulated fault (`camera_disconnect`, `sensor_timeout`, `gpu_overheat`)
 - `GET /metrics` — Prometheus metrics
 
-## Run locally
+## Run (single port: backend serves frontend)
+From repo root:
+
+- cd station-health-ui
+- npm install
+- npm run build
+- cd ..
+- npm install
+- npm run build
+- npm start
+
+Then open: http://localhost:8080
+API is available at: http://localhost:8080/health
+
+## Dev mode (two servers)
+### Backend
 - npm install
 - npm run dev
 
-## Frontend (UI)
+### Frontend
 - cd station-health-ui
 - npm install
 - npm run dev

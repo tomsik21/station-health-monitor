@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import "@tensorflow/tfjs";
 
+
+
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8080";
 
 type Health = {

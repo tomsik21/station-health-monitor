@@ -11,9 +11,12 @@ const config_1 = require("./config");
 const metrics_1 = require("./metrics");
 const os_1 = __importDefault(require("os"));
 const device_1 = require("./device");
+const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
 function createApp() {
     const app = (0, express_1.default)();
     app.use(express_1.default.json());
+    app.use((0, cors_1.default)());
     // structured request logging
     app.use((0, pino_http_1.default)({
         logger: logger_1.logger,
@@ -89,6 +92,13 @@ function createApp() {
             service: config_1.config.serviceName,
             endpoints: ["/health", "/metrics"],
         });
+    });
+    // Serve frontend build (single-port)
+    const uiPath = path_1.default.resolve(__dirname, "../station-health-ui/dist");
+    app.use(express_1.default.static(uiPath));
+    // React SPA fallback
+    app.get("*", (_req, res) => {
+        res.sendFile(path_1.default.join(uiPath, "index.html"));
     });
     // minimal error handler
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

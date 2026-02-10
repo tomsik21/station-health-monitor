@@ -6,6 +6,7 @@ import { register, httpRequestCounter, healthCheckCounter } from "./metrics";
 import os from "os";
 import { getDeviceState, simulateFault, startDeviceSimulation, FaultType } from "./device";
 import cors from "cors";
+import path from "path";
 
 
 
@@ -103,6 +104,16 @@ export function createApp() {
       endpoints: ["/health", "/metrics"],
     });
   });
+
+    // Serve frontend build (single-port)
+  const uiPath = path.resolve(__dirname, "../station-health-ui/dist");
+  app.use(express.static(uiPath));
+
+  // React SPA fallback
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(uiPath, "index.html"));
+  });
+
 
   // minimal error handler
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
