@@ -32,13 +32,11 @@ The frontend communicates with the backend over HTTP and is designed to resemble
 - `GET /metrics` — Prometheus metrics
 
 ## Run locally
-```bash
-npm install
-npm run dev
+- npm install
+- npm run dev
 
 ## Frontend (UI)
-```bash
-cd station-health-ui
-npm install
-npm run dev
+- cd station-health-ui
+- npm install
+- npm run dev
 
