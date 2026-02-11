@@ -7,11 +7,14 @@
     "node": ">=18"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "vitest run",
-    "lint": "eslint ."
+     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "test": "vitest run",
+  "lint": "eslint .",
+  "build:ui": "cd station-health-ui && npm install && npm run build",
+  "build:all": "npm run build:ui && npm run build",
+  "start:all": "npm run build:all && npm start"
   },
   "dependencies": {
     "cors": "^2.8.6",
