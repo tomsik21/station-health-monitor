@@ -98,12 +98,12 @@ export function createApp() {
     res.status(200).send(await register.metrics());
   });
 
-  app.get("/", (_req, res) => {
-    res.status(200).json({
-      service: config.serviceName,
-      endpoints: ["/health", "/metrics"],
-    });
+  app.get("/api", (_req, res) => {
+  res.status(200).json({
+    service: config.serviceName,
+    endpoints: ["/health", "/device", "/simulate/fault", "/metrics"],
   });
+});
 
     // Serve frontend build (single-port)
   const uiPath = path.resolve(__dirname, "../station-health-ui/dist");
