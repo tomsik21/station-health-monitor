@@ -1,19 +1,32 @@
-# Station Health Monitor (TypeScript + Node.js)
+# Station Health Monitor 
 
-A lightweight, edge-inspired service that exposes station health + Prometheus metrics and simulates device faults.  
-Built to demonstrate reliability patterns used in factory-floor / station applications.
+A lightweight edge-inspired monitoring service that exposes system health, Prometheus metrics, simulated device state, and a React dashboard — designed to resemble reliability patterns used in factory-floor station applications.
+
+## Overview
+This project demonstrates:
+- Edge-style system monitoring
+- Device fault simulation
+- Observability with Prometheus metrics
+- Structured logging
+- Single-port deployment (API + UI)
+- Clean clone-and-run setup
+It is designed as a minimal, production-style example of how in-factory or on-premise stations can expose health, metrics, and fault states for monitoring and debugging.
 
 ## Features
-- Health endpoint with host/runtime snapshot (`/health`)
-- Prometheus metrics (`/metrics`)
-- Simulated device state (`/device`)
-- Fault injection to test failure handling (`/simulate/fault`)
+Backend (TypeScript + Node.js)
+- GET /health — runtime + host snapshot
+- GET /device — simulated station device state
+- POST /simulate/fault — inject device faults
+- GET /metrics — Prometheus metrics endpoint
 - Structured logging (pino)
-- Dockerized build/run
-- Graceful shutdown (SIGINT/SIGTERM)
+- Graceful shutdown handling
+- Docker support
 
-## Frontend Dashboard
-A simple React + TypeScript dashboard that connects to the backend and visualizes station state.
+Frontend (React + TypeScript)
+- Live health and device status
+- Fault injection controls
+- Prometheus station metrics preview
+- Client-side image recognition demo (MobileNet running in-browser)
 
 **Features:**
 - Live health and device status
@@ -21,8 +34,23 @@ A simple React + TypeScript dashboard that connects to the backend and visualize
 - Station metrics preview
 - Client-side image recognition demo (MobileNet, runs in browser)
 
-The frontend communicates with the backend over HTTP and is designed to resemble an internal station monitoring UI.
+## Architecture
+- Express backend serves REST API
+- Prometheus metrics exposed at /metrics
+- React frontend built with Vite
+- Backend serves the built frontend for single-port deployment
+Everything runs on port 8080 in production mode.
 
+## Quickstart (Single-Port Mode)
+From the repository root:
+1. Install dependencies
+- npm install
+
+2. Start everything (builds frontend + backend automatically)
+- npm run start:all
+
+3. Open in browser
+- http://localhost:8080
 
 ## Endpoints
 - `GET /` — service info
@@ -30,20 +58,6 @@ The frontend communicates with the backend over HTTP and is designed to resemble
 - `GET /device` — simulated station device state
 - `POST /simulate/fault` — inject a simulated fault (`camera_disconnect`, `sensor_timeout`, `gpu_overheat`)
 - `GET /metrics` — Prometheus metrics
-
-## Run (single port: backend serves frontend)
-From repo root:
-
-- cd station-health-ui
-- npm install
-- npm run build
-- cd ..
-- npm install
-- npm run build
-- npm start
-
-Then open: http://localhost:8080
-API is available at: http://localhost:8080/health
 
 ## Dev mode (two servers)
 ### Backend
@@ -54,4 +68,35 @@ API is available at: http://localhost:8080/health
 - cd station-health-ui
 - npm install
 - npm run dev
+
+## Docker
+Build:
+- docker build -t station-health-monitor .
+Run:
+- docker run -p 8080:8080 station-health-monitor
+
+## Why This Project?
+This project simulates reliability patterns common in:
+- Edge computing environments
+- Factory-floor inspection stations
+- Camera-based monitoring systems
+- On-prem inference nodes
+- Long-running device monitoring services
+It demonstrates ownership of:
+- Observability design
+- Health modeling
+- Fault injection patterns
+- Frontend-backend integration
+- Production-style setup hygiene
+
+## Tech Stack
+- TypeScript
+- Node.js
+- Express
+- React
+- Prometheus (prom-client)
+- Pino
+- Docker
+- Vite
+
 
