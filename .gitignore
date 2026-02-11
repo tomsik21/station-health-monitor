@@ -1,4 +1,5 @@
 node_modules
+station-health-ui/node_modules
 dist
 station-health-ui/dist
 .env
